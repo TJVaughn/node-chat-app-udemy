@@ -11,16 +11,19 @@ app.use(express.static(publicDirPath))
 
 const io = socketio(server)
 
-let count = 0
+const user = 'User'
+// let count = 0
 io.on('connection', (socket) => {
-    // console.log('New client');
-    socket.emit('countUpdated', count)
 
-    socket.on("increment", () => {
-        count++
-        // socket.emit('countUpdated', count)
-        io.emit('countUpdated', count)
-    })
+    socket.emit('message', `Welcome ${user}!`)
+    // console.log('New client');
+    // socket.emit('countUpdated', count)
+
+    // socket.on("increment", () => {
+    //     count++
+    //     // socket.emit('countUpdated', count)
+    //     io.emit('countUpdated', count)
+    // })
 })
 
 

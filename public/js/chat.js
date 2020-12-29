@@ -6,7 +6,12 @@ socket.on('countUpdated', (count) => {
     document.getElementById('count-value').textContent = count
 })
 
-document.getElementById('plus-btn').addEventListener('click', () => {
-    console.log("clicked");
-    socket.emit('increment')
+socket.on('message', (message) => {
+    // console.log("Updated Count " + count);
+    document.getElementById('count-value').textContent = message
 })
+
+// document.getElementById('plus-btn').addEventListener('click', () => {
+//     console.log("clicked");
+//     socket.emit('increment')
+// })
