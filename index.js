@@ -5,17 +5,27 @@ const path = require('path')
 const socketio = require('socket.io')
 const http = require('http')
 const server = http.createServer(app)
-require('./')
 
 const publicDirPath = path.join(__dirname, './public')
-
 app.use(express.static(publicDirPath))
 
 const io = socketio(server)
 
-io.on('connection', () => {
-    console.log(('Client has connected!'));
+let count = 0
+io.on('connection', (socket) => {
+    // console.log('New client');
+    socket.emit('countUpdated', count)
+
+    socket.on("increment", () => {
+        count++
+        // socket.emit('countUpdated', count)
+        io.emit('countUpdated', count)
+    })
 })
+
+
+
+
 server.listen(port, () => {
     console.log(`Server is listening on port:${port}`);
 })
