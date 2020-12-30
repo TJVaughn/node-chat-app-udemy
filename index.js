@@ -16,6 +16,10 @@ const user = 'User'
 io.on('connection', (socket) => {
 
     socket.emit('message', `Welcome ${user}!`)
+    socket.on("chat", (chat) => {
+        // console.log(chat);
+        io.emit('chat', chat)
+    })
     // console.log('New client');
     // socket.emit('countUpdated', count)
 
@@ -25,7 +29,6 @@ io.on('connection', (socket) => {
     //     io.emit('countUpdated', count)
     // })
 })
-
 
 
 
